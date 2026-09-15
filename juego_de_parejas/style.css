@@ -1,0 +1,89 @@
+/* 1. Centrar todo el juego en la mitad exacta de la pantalla */
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, #000000, #1002a3);
+  font-family: sans-serif;
+  color: #ffffff;
+}
+.juego h3 {
+  font-size: 2.5rem;
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  font-variant: small-caps; 
+  font-variant-ligatures: contextual;
+  letter-spacing: 4px;   
+  word-spacing: 8px;   
+}
+
+.juego {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 20px;
+}
+
+.tablero {
+  display: grid;
+  /* Aumentamos las columnas a 120px cada una (antes 70px) */
+  grid-template-columns: repeat(4, 120px); 
+  gap: 15px;
+  margin: 20px 0;
+}
+
+.carta {
+  width: 180px;  /* Tamaño grande (antes 70px) */
+  height: 180px;
+  perspective: 600px;
+  cursor: pointer;
+}
+
+.carta-interior {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.4s;
+  transform-style: preserve-3d;
+}
+
+.carta.volteada .carta-interior {
+  transform: rotateY(180deg);
+}
+
+.carta-cara {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.carta-frente {
+  background: #4a3fcf;
+}
+
+.carta-reverso {
+  background: #ffffff;
+  border: 2px solid #d8dae8;
+  transform: rotateY(180deg);
+}
+
+.carta.emparejada .carta-reverso {
+  background: #d9f0e3;
+  border-color: #17a673;
+}
+
+/* 4. Ajuste de tus imágenes para que ocupen bien el espacio */
+.img-carta {
+  width: 85%;
+  height: 85%;
+  object-fit: contain;
+  pointer-events: none;
+}

@@ -22,17 +22,19 @@ let bloqueado = false;
 let movimientos = 0;
 let paresEncontrados = 0;
 
-function crearSvgSimbolo(simbolo) {
+function crearImagenSimbolo(simbolo) {
   if (simbolo === "circulo") {
-    return "<svg viewBox='0 0 40 40' width='34' height='34'><circle cx='20' cy='20' r='14' fill='#2451c4'/></svg>";
+    return "<img src='1.jpg' class='img-carta' alt='Círculo'>";
   }
   if (simbolo === "cuadrado") {
-    return "<svg viewBox='0 0 40 40' width='34' height='34'><rect x='7' y='7' width='26' height='26' fill='#17a673'/></svg>";
+    return "<img src=2.jpg class='img-carta' alt='Cuadrado'>";
   }
   if (simbolo === "triangulo") {
-    return "<svg viewBox='0 0 40 40' width='34' height='34'><polygon points='20,6 34,34 6,34' fill='#d9782d'/></svg>";
+    return "<img src=3.jpg class='img-carta' alt='Triángulo'>";
   }
-  return "<svg viewBox='0 0 40 40' width='34' height='34'><polygon points='20,4 24,16 37,16 26,24 30,36 20,28 10,36 14,24 3,16 16,16' fill='#e3b341'/></svg>";
+  if (simbolo === "estrella") {
+    return "<img src=4.jpg class='img-carta' alt='Estrella'>";
+  }
 }
 
 function crearTablero() {
@@ -53,7 +55,8 @@ function crearTablero() {
 
     const reverso = document.createElement("div");
     reverso.className = "carta-cara carta-reverso";
-    reverso.innerHTML = crearSvgSimbolo(simbolo);
+    // CORREGIDO: Se llama a la nueva función
+    reverso.innerHTML = crearImagenSimbolo(simbolo);
 
     interior.appendChild(frente);
     interior.appendChild(reverso);
@@ -67,18 +70,10 @@ crearTablero();
 tablero.addEventListener("click", function (evento) {
   const carta = evento.target.closest(".carta");
 
-  if (!carta) {
-    return;
-  }
-  if (bloqueado) {
-    return;
-  }
-  if (carta.classList.contains("volteada")) {
-    return;
-  }
-  if (carta.classList.contains("emparejada")) {
-    return;
-  }
+  if (!carta) return;
+  if (bloqueado) return;
+  if (carta.classList.contains("volteada")) return;
+  if (carta.classList.contains("emparejada")) return;
 
   carta.classList.add("volteada");
   cartasVolteadas.push(carta);
